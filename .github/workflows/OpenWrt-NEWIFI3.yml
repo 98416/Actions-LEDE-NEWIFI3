@@ -63,23 +63,23 @@ jobs:
           REPO_BRANCH: master
         run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt       
            
-    - name: Update feeds
-      run: cd openwrt && ./scripts/feeds update -a
+      - name: Update feeds
+        run: cd openwrt && ./scripts/feeds update -a
 
-    - name: Install feeds
-      run: cd openwrt && ./scripts/feeds install -a
+      - name: Install feeds
+        run: cd openwrt && ./scripts/feeds install -a
 
-    - name: Load custom configuration
-      env:
-        CONFIG_FILE: '.config'
-        DIY_SH: 'diy.sh'
-      run: |
-        [ -e package ] && mv package openwrt/package
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_SH
-        cd openwrt
-        ../$DIY_SH
-        make defconfig
+      - name: Load custom configuration
+        env:
+          CONFIG_FILE: '.config'
+          DIY_SH: 'diy.sh'
+        run: |
+          [ -e package ] && mv package openwrt/package
+          [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+          chmod +x $DIY_SH
+          cd openwrt
+          ../$DIY_SH
+          make defconfig
       - name: Download package source code
         run: |
           make download -j8

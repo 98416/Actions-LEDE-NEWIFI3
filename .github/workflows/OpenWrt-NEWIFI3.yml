@@ -59,10 +59,11 @@ jobs:
           sudo -E apt-get clean
       - name: Clone source code
         run: |
-          git clone https://github.com/coolsnowwolf/lede
-           cd lede
+          git clone https://github.com/coolsnowwolf/lede        
+           
       - name: Update feeds
         run: |
+          cd lede
           ./scripts/feeds update -a
           ./scripts/feeds install -a
       - name: Costom configure file

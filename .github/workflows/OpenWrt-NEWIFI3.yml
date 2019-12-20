@@ -80,17 +80,37 @@ jobs:
           cd openwrt
           ../$DIY_SH
           make defconfig
-      - name: Download package source code
+      - name: Download package
         run: |
-          make download -j8
+          cd openwrt && make download -j8
           find dl -size -1024c -exec ls -l {} \;
           find dl -size -1024c -exec rm -f {} \;
-      - name: Compile firmware
+      - name: Multi-thread compile
         run: |
-          echo -e "$(nproc) thread build."
-          make -j$(nproc) V=s
-      - name : Upload artifact
+          cd openwrt
+          echo -e "$(nproc) thread compile"
+          make -j$(nproc)
+      - name: Single-thread compile
+        if: failure()
+        run: |
+          cd openwrt
+          make -j1 V=s
+      - name: Upload bin directory
         uses: actions/upload-artifact@master
+        if: always()
         with:
-          name: OpenWrt Newifi3
-          path: bin/targets
+          name: OpenWrt_bin
+          path: openwrt/bin
+
+      - name: Organize files
+        if: always()
+        run: |
+          cd openwrt/bin/targets/*/*
+          rm -rf packages
+          echo "::set-env name=FIRMWARE::$(pwd)"
+      - name: Upload firmware
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: OpenWrt_NEWIFI3
+          path: ${{ env.FIRMWARE }}

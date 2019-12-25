@@ -71,7 +71,7 @@ jobs:
 
       - name: Load custom configuration
         env:
-          CONFIG_FILE: '.config'
+          CONFIG_FILE: 'newifi3.config'
           DIY_SH: 'diy.sh'
         run: |
           [ -e package ] && mv package openwrt/package

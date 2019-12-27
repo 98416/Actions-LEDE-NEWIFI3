@@ -17,7 +17,7 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon_new/g' package/feeds/luci/luci/M
 git clone https://github.com/rufengsuixing/luci-app-adguardhome.git package/mine/luci-app-adguardhome
 
 # KPR plus+
-git clone https://github.com/Ameykyl/luci-app-koolproxyR.git package/mine/luci-app-koolproxyR
+git clone https://github.com/jefferymvp/luci-app-koolproxyR package/mine/luci-app-koolproxyR
 
 # Server酱
 git clone https://github.com/tty228/luci-app-serverchan package/mine/luci-app-serverchan

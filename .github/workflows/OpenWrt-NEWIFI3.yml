@@ -7,17 +7,17 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: OpenWrt-NEWIFI3
+#name: OpenWrt-NEWIFI3
 
 on:
-  push:
-    branches: 
-      - master
+ # push:
+   # branches: 
+     # - master
   #     ↑↑↑ 改成你的分支名, 一般是master
-  # schedule:
+  #  schedule:
   #   - cron: 0 20 * * *
-  # release:
-  #   types: [published]
+  release:
+    types: [published]
 
 jobs:
   build:
